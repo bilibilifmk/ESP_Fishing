@@ -1,9 +1,10 @@
 # ESP_Fishing
+# 视频展示 https://www.bilibili.com/video/BV1154y1a76m/
 # 说明
  ## ESP82266 自动化WiFi密码钓鱼
 
 
- * 需要使用魔改SDK 否则攻击帧会被SDK忽略 
+ * 需要使用魔改SDK 否则攻击帧会被SDK忽略 （SDK去群里下载吧 有时间上传网盘）
  * 基于wifi_link_tool库开发（给个Star呗）https://github.com/bilibilifmk/wifi_link_tool
  * 需要上传文件系统
 
