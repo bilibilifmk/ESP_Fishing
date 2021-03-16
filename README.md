@@ -1,5 +1,6 @@
 # ESP_Fishing
 # 视频展示 https://www.bilibili.com/video/BV1154y1a76m/
+## 编译版本下载 https://github.com/bilibilifmk/ESP_Fishing/releases
 # 说明
  ## ESP82266 自动化WiFi密码钓鱼
 
