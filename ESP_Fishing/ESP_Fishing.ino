@@ -70,7 +70,7 @@ void set()
     {
       String ssids = webServer.arg("ssid");
       String passwords = webServer.arg("password");
-      SPIFFS.remove("/WIFIssud.txt");
+      SPIFFS.remove("/WIFIssid.txt");
       File file = SPIFFS.open("/WIFIssid.txt", "w");
       file.print(ssids);
       file.close();
